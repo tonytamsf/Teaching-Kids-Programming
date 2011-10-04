@@ -10,3 +10,14 @@ social-drawing:
     - a friend can join and draw on a shared canvas
   - reference: 
     - http://dev.opera.com/articles/view/html5-canvas-painting/
+
+
+-------
+Reference commands
+  git config --global user.name "Tony Tam"
+  git config --global user.name "tam.tony@gmail.com"
+  git init
+  git add README
+  git commit -m 'first commit for social drawing' README
+  git remote add origin https://tam.tony@code.google.com/p/teaching-kids-programming/ 
+  git push -u origin master
