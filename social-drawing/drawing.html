@@ -1,83 +1,166 @@
-<html>
-<header>
-
-  #color-pallette {
-  width: 50;
-  height: 350;
-  }
-  </header>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>
 Social Drawing
-</title>
+</title></head><body><header>
+<style>
+ body {
+     margin: 0;
+ }
+
+  #main {
+      padding: 10px;
+  }
+  #color-pallette {
+      width: 50;
+      height: 350;
+      border: 1px solid black;
+      float: left;
+      padding: 2px;
+      margin: 2px;
+  }
+
+.color-block-class {
+    width: 50px;
+    height: 50px;
+    float: left;
+    position:relative;
+    left: 0px;
+    top: 0px;
+}
+
+#color1 {
+    background-color: #ECFC00;
+    position:relative;
+    left: 0px;
+    top: 0px;
+}
+
+#color2 {
+    background-color: #34D800;
+    position:relative;
+}
+
+#color3 {
+    background-color: #EB3B88;
+    position:relative;
+}
+
+#color4 {
+    background-color: #9240D5;
+    position:relative;
+}
+
+#color5 {
+    background-color: #F60018;
+    width: 50px;
+    height: 50px;
+    position:relative;
+}
+
+
+#color6 {
+    background-color: cyan;
+    position:relative;
+}
+
+#color
+  </style>
+  </header>
+
 <div id="main">
 
-<div id='color-pallette'>
-<div id='color1'>
+<div id="color-pallette">
+      
+<div id="color1" class="color-block-class">
   </div>
-  <div id='color2'>
+  <div id="color2" class="color-block-class">
   </div>
-  <div id='color3'>
+  <div id="color3" class="color-block-class">
   </div>
-  <div id='color4'>
+  <div id="color4" class="color-block-class">
   </div>
-  <div id='color5'>
+  <div id="color5" class="color-block-class">
   </div>
-  <div id='color6'>
+  <div id="color6" class="color-block-class">
   </div>
-  <div id='color7'>
+  <div id="color7" class="color-block-class">
   </div>
   </div>
-  <canvas id="canvas" width=500 height=350>
+
+  <canvas id="canvas" width="800" height="650">
   </canvas>
   </div>
 <script>
 var ctx;
+var penDown = false;
 var neonColor = Array(
-  '#E2FA00', /* yellow */
-  '#34D800', /* green */
-  '#EB3B88', /* pink */
-  '#9240D5', 
-  '#F60018',
-  'cyan'
-  );
+                      '#ECFC00', /* yellow */
+                      '#34D800', /* green */
+                      '#EB3B88', /* pink */
+                      '#9240D5', 
+                      '#F60018',
+                      'cyan'
+                      );
   
-  function init_pallett()
-  {
-  }
-  function init()
-{  
-	var mouseX;
-	var mouseY;
-var canvas = document.getElementById("canvas");
-if (canvas && canvas.getContext)
+function init_pallett()
 {
- ctx = canvas.getContext("2d");
-canvas.addEventListener("mousemove", onMouseMove, false);
-var radial = ctx.createRadialGradient(370, 60, 0, 370, 60, 70);
-ctx.strokeStyle = 'lime';
-ctx.lineWidth = 10;
-ctx.lineCap = 'round';
-ctx.lineJoin = 'round';
-ctx.beginPath();
-ctx.moveTo(10,10)
-
-ctx.lineTo(500,10);
-ctx.lineTo(500, 350);
-
-ctx.lineTo(10,350);	
-ctx.lineTo(10,10);	
-ctx.stroke();
-
-ctx.closePath();
-
 }
-  }
-  onload = init;
+function init()
+{  
+    var mouseX;
+    var mouseY;
+    var canvas = document.getElementById("canvas");
+    var color_pallette = document.getElementById("color-pallette");
+    
+    if (canvas && canvas.getContext)
+        {
+            ctx = canvas.getContext("2d");
+            canvas.addEventListener("mousemove", onMouseMove, false);
+            canvas.addEventListener("mousedown", onMouseDown, false);
+            canvas.addEventListener("mouseup", onMouseUp, false);
+            /* TODO even listening for the color pallette */
+            
+            var radial = ctx.createRadialGradient(370, 60, 0, 370, 60, 70);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 1;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+            ctx.moveTo(1,1)
+
+                ctx.lineTo(800,1);
+            ctx.lineTo(800, 650);
+
+            ctx.lineTo(1,650);
+            ctx.lineTo(1,1);
+            ctx.stroke();
+
+            ctx.closePath();
+
+        }
+}
+
+onload = init;
 function onMouseMove(e)
 {
-	mouseX = e.clientX-canvas.offsetLeft;
-	mouseY = e.clientY-canvas.offsetTop;
-	ctx.lineTo(mouseX, mouseY);
-	ctx.stroke();
+    if (penDown) {
+        mouseX = e.clientX-canvas.offsetLeft;
+        mouseY = e.clientY-canvas.offsetTop;
+        ctx.lineTo(mouseX, mouseY);
+        ctx.stroke();
+    }
+}
+function onMouseUp(e)
+{
+    penDown = false;
+    
+}
+
+function onMouseDown(e)
+{
+    penDown = true;
+    ctx.moveTo(e.clientX-canvas.offsetLeft, e.clientY-canvas.offsetTop);
 }
 </script>
+    </body></html>
