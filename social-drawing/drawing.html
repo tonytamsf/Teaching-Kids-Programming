@@ -11,6 +11,10 @@ Social Drawing
   #main {
       padding: 10px;
   }
+
+ #toolbar {
+      float: left;
+ }
   #color-pallette {
       width: 50;
       height: 350;
@@ -65,37 +69,40 @@ Social Drawing
 }
 
   #credit {
-    font:11px arial,sans-serif;
+    font:8px arial,sans-serif;
+    margin: 2px;
   }
   </style>
   </header>
 
 <div id="main">
 
-<div id="color-pallette">
+  <div id="toolbar"
+    <div id="color-pallette">
       
-<div id="color1" class="color-block-class">
-  </div>
-  <div id="color2" class="color-block-class">
-  </div>
-  <div id="color3" class="color-block-class">
-  </div>
-  <div id="color4" class="color-block-class">
-  </div>
-  <div id="color5" class="color-block-class">
-  </div>
-  <div id="color6" class="color-block-class">
-  </div>
-  <div id="color7" class="color-block-class">
-  </div>
-  </div>
+      <div id="color1" class="color-block-class">
+      </div>
+      <div id="color2" class="color-block-class">
+      </div>
+      <div id="color3" class="color-block-class">
+      </div>
+      <div id="color4" class="color-block-class">
+      </div>
+      <div id="color5" class="color-block-class">
+      </div>
+      <div id="color6" class="color-block-class">
+      </div>
+      <div id="color7" class="color-block-class">
+      </div>
+    </div>
+    <div id="credit">
+      Tony & Cate T.
+    </div>
+</div>
 
-  <canvas id="canvas" width="800" height="650">
-  </canvas>
-  <div id="credit">
-  Tony T. & Cate T.
-  </div>
-  </div>
+<canvas id="canvas" width="800" height="650">
+</canvas>
+</div>
 <script>
 var ctx;
 var penDown = false;
@@ -128,13 +135,13 @@ function init()
             
             var radial = ctx.createRadialGradient(370, 60, 0, 370, 60, 70);
             ctx.strokeStyle = 'black';
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 0.5;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.beginPath();
             ctx.moveTo(1,1)
 
-                ctx.lineTo(800,1);
+            ctx.lineTo(800,1);
             ctx.lineTo(800, 650);
 
             ctx.lineTo(1,650);
@@ -152,6 +159,10 @@ function onMouseMove(e)
     if (penDown) {
         mouseX = e.clientX-canvas.offsetLeft;
         mouseY = e.clientY-canvas.offsetTop;
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 1.0
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
         ctx.lineTo(mouseX, mouseY);
         ctx.stroke();
     }
