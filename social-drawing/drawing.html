@@ -1,13 +1,47 @@
 <html>
+<header>
+
+  #color-pallette {
+  }
+  </header>
 <title>
 Social Drawing
 </title>
-<canvas id="canvas" width=500 height=350>
-  </canvas>
+<div id="main">
 
+<div id='color-pallette'>
+<div id='color1'>
+  </div>
+  <div id='color2'>
+  </div>
+  <div id='color3'>
+  </div>
+  <div id='color4'>
+  </div>
+  <div id='color5'>
+  </div>
+  <div id='color6'>
+  </div>
+  <div id='color7'>
+  </div>
+  </div>
+  <canvas id="canvas" width=500 height=350>
+  </canvas>
+  </div>
 <script>
 var ctx;
-
+var neonColor = Array(
+  '#E2FA00', /* yellow */
+  '#34D800', /* green */
+  '#EB3B88', /* pink */
+  '#9240D5', 
+  '#F60018',
+  'cyan'
+  );
+  
+  function init_pallett()
+  {
+  }
   function init()
 {  
 	var mouseX;
