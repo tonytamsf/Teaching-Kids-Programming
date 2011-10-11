@@ -212,6 +212,7 @@ function onMouseMove(e)
        //        ctx.strokeStyle = '#9240D5';
 
         ctx.lineWidth = 3.0
+
         ctx.beginPath();
         ctx.moveTo(mouseDownX, mouseDownY);
         ctx.lineCap = 'round';
@@ -219,7 +220,7 @@ function onMouseMove(e)
         ctx.strokeStyle = currentStrokeStyle;
         ctx.lineTo(mouseX, mouseY);
         mouseDownX = mouseX;
-        moseDownY = mouseY;
+        mouseDownY = mouseY;
         ctx.stroke();
         ctx.closePath();
 
@@ -234,7 +235,7 @@ function onMouseDown(e)
 {
     penDown = true;
     mouseDownX = e.clientX-canvas.offsetLeft;
-    mouseDownY = e.clientY-canvas.offsetLeft;
+    mouseDownY = e.clientY-canvas.offsetTop;
 }
 </script>
     </body></html>
