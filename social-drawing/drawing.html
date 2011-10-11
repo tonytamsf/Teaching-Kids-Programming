@@ -137,12 +137,32 @@ function init()
             canvas.addEventListener("mousedown", onMouseDown, false);
             canvas.addEventListener("mouseup", onMouseUp, false);
             /* TODO even listening for the color pallette */
-            
+
+            var colorPicker = document.getElementById('color1');
+            colorPicker.addEventListener("mousedown", pickColorMouseDown, false);
+
+            colorPicker = document.getElementById('color2');
+            colorPicker.addEventListener("mousedown", pickColorMouseDown, false);
+
+            colorPicker = document.getElementById('color3');
+            colorPicker.addEventListener("mousedown", pickColorMouseDown, false);
+
+            colorPicker = document.getElementById('color4');
+            colorPicker.addEventListener("mousedown", pickColorMouseDown, false);
+
+            colorPicker = document.getElementById('color5');
+            colorPicker.addEventListener("mousedown", pickColorMouseDown, false);
+
+            colorPicker = document.getElementById('color6');
+            colorPicker.addEventListener("mousedown", pickColorMouseDown, false);
+
             var radial = ctx.createRadialGradient(370, 60, 0, 370, 60, 70);
             ctx.strokeStyle = 'black';
             ctx.lineWidth = 0.5;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
+
+            // rectangle frame
             ctx.beginPath();
             ctx.moveTo(1,1)
 
@@ -156,6 +176,14 @@ function init()
             ctx.closePath();
 
         }
+}
+var currentStrokeStyle = 'black';
+function pickColorMouseDown(e)
+{
+   if (window.getComputedStyle)
+   {
+       currentStrokeStyle = window.getComputedStyle(this,null).getPropertyValue('background-color');
+   } 
 }
 
      function randomRgb() {
@@ -174,45 +202,38 @@ function init()
 
 
 onload = init;
-var mirrorX;
-var mirrorY;
+var mouseDownX;
+var mouseDownY;
 function onMouseMove(e)
 {
     if (penDown) {
         mouseX = e.clientX-canvas.offsetLeft;
         mouseY = e.clientY-canvas.offsetTop;
-        ctx.strokeStyle = '#9240D5';
+       //        ctx.strokeStyle = '#9240D5';
+
         ctx.lineWidth = 3.0
+        ctx.beginPath();
+        ctx.beginPath();
+        ctx.moveTo(mouseDownX, mouseDownY);
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
-        ctx.beginPath();
-
+        ctx.strokeStyle = currentStrokeStyle;
         ctx.lineTo(mouseX, mouseY);
+        ctx.stroke();
         ctx.closePath();
-        ctx.stroke();
 
-        mirrorX = mouseX + 200;
-        mirrorY = mouseY;
-
-        ctx.beginPath();
-        ctx.moveTo(mirrorX, mirrorY);
-        ctx.lineTo(mirrorX, mirrorY);
-        ctx.closPath();
-        ctx.stroke();
     }
 }
 function onMouseUp(e)
 {
     penDown = false;
-    
 }
 
 function onMouseDown(e)
 {
     penDown = true;
-    ctx.moveTo(e.clientX-canvas.offsetLeft, e.clientY-canvas.offsetTop);
-    mirrorX = e.clientX-canvas.offsetLeft + 200;
-    mirrorY = e.clientY-canvas.offsetLeft;
+    mouseDownX = e.clientX-canvas.offsetLeft;
+    mouseDownY = e.clientY-canvas.offsetLeft;
 }
 </script>
     </body></html>
