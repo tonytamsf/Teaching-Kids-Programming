@@ -213,12 +213,13 @@ function onMouseMove(e)
 
         ctx.lineWidth = 3.0
         ctx.beginPath();
-        ctx.beginPath();
         ctx.moveTo(mouseDownX, mouseDownY);
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         ctx.strokeStyle = currentStrokeStyle;
         ctx.lineTo(mouseX, mouseY);
+        mouseDownX = mouseX;
+        moseDownY = mouseY;
         ctx.stroke();
         ctx.closePath();
 
