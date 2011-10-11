@@ -68,6 +68,11 @@ Social Drawing
     position:relative;
 }
 
+#color7 {
+    background-color: black;
+    position:relative;
+}
+
   #credit {
     font:8px arial,sans-serif;
     margin: 2px;
@@ -153,17 +158,38 @@ function init()
         }
 }
 
+     function randomRgb() {
+            // create the rgb string
+            var col =  "rgb("
+            + randomColor(255) + ","
+            + randomColor(255) + ","
+            + randomColor(255) + ")";
+           return col;
+       }
+
+
+        function randomColor(num) {          
+            return Math.floor(Math.random() * num);
+        }     
+
+
 onload = init;
+var mirrorX;
+var mirrorY;
 function onMouseMove(e)
 {
     if (penDown) {
         mouseX = e.clientX-canvas.offsetLeft;
         mouseY = e.clientY-canvas.offsetTop;
-        ctx.strokeStyle = 'black';
-        ctx.lineWidth = 1.0
+        ctx.strokeStyle = '#9240D5';
+        ctx.lineWidth = 3.0
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         ctx.lineTo(mouseX, mouseY);
+
+        ctx.moveTo(mirrorX, mirrorY);
+        mirrorX = mouseX + 200;
+        mirrorY = mouseY;
         ctx.stroke();
     }
 }
@@ -177,6 +203,8 @@ function onMouseDown(e)
 {
     penDown = true;
     ctx.moveTo(e.clientX-canvas.offsetLeft, e.clientY-canvas.offsetTop);
+    mirrorX = e.clientX-canvas.offsetLeft + 200;
+    mirrorY = e.clientX-canvas.offsetLeft;
 }
 </script>
     </body></html>
