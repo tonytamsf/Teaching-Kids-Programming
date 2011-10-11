@@ -185,11 +185,19 @@ function onMouseMove(e)
         ctx.lineWidth = 3.0
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
-        ctx.lineTo(mouseX, mouseY);
+        ctx.beginPath();
 
-        ctx.moveTo(mirrorX, mirrorY);
+        ctx.lineTo(mouseX, mouseY);
+        ctx.closePath();
+        ctx.stroke();
+
         mirrorX = mouseX + 200;
         mirrorY = mouseY;
+
+        ctx.beginPath();
+        ctx.moveTo(mirrorX, mirrorY);
+        ctx.lineTo(mirrorX, mirrorY);
+        ctx.closPath();
         ctx.stroke();
     }
 }
@@ -204,7 +212,7 @@ function onMouseDown(e)
     penDown = true;
     ctx.moveTo(e.clientX-canvas.offsetLeft, e.clientY-canvas.offsetTop);
     mirrorX = e.clientX-canvas.offsetLeft + 200;
-    mirrorY = e.clientX-canvas.offsetLeft;
+    mirrorY = e.clientY-canvas.offsetLeft;
 }
 </script>
     </body></html>
