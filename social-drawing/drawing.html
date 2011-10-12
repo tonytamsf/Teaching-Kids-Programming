@@ -9,7 +9,7 @@ Social Drawing
  }
 
   #main {
-      padding: 10px;
+    padding: 10px;
     float: left;
   }
 
@@ -80,6 +80,10 @@ Social Drawing
     margin: 2px;
     clear: both;
   }
+  
+  #drawing-div {
+    padding: 10px;
+  }
   </style>
   </header>
 
@@ -107,9 +111,10 @@ Social Drawing
       Tony & Cate T.
     </div>
 </div>
-
-<canvas id="canvas" width="800" height="650">
-</canvas>
+<div id="drawing-div">
+  <canvas id="canvas" width="800" height="650">
+  </canvas>
+</div>
 </div>
 <script>
 var ctx;
