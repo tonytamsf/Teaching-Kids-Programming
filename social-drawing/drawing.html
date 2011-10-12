@@ -9,11 +9,13 @@ Social Drawing
  }
 
   #main {
-      padding: 10px;
+    padding: 10px;
+    float: left;
   }
 
  #toolbar {
-      float: left;
+    float: left;
+    width: 60px;
  }
   #color-pallette {
       width: 50;
@@ -76,6 +78,11 @@ Social Drawing
   #credit {
     font:8px arial,sans-serif;
     margin: 2px;
+    clear: both;
+  }
+  
+  #drawing-div {
+    padding: 10px;
   }
   </style>
   </header>
@@ -104,9 +111,10 @@ Social Drawing
       Tony & Cate T.
     </div>
 </div>
-
-<canvas id="canvas" width="800" height="650">
-</canvas>
+<div id="drawing-div">
+  <canvas id="canvas" width="800" height="650">
+  </canvas>
+</div>
 </div>
 <script>
 var ctx;
