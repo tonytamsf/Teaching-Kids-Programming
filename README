@@ -16,6 +16,17 @@ DrawMee
 
 social-drawing: 
 ---------------
+  - Bug: eraser erases border
+  - Bug: hitting return on pen size resets the drawing
+  - Be able to save a drawing and load it back
+  - Switch to 5 different colr pallattes.
+    - Neon
+    - summer
+    - spring
+    - fall
+    - winter
+  - Share the drawing to a friend, and that friend can see the list of drawings shared with him/her
+
   - DONE A simple canvas to draw
   - DONE A color palette on top with 7 colors
     - DONE she wants neon colors
@@ -27,14 +38,7 @@ social-drawing:
   - DONE Need a eraser or white color
 
   - DONE P1 Brush size
-  - Bug: eraser erases border
-  - Bug: hitting return on pen size resets the drawing
-  - be able to save a drawing and load it back
-
-  - Bonus
-    - a friend can join and draw on a shared canvas
-  - reference: 
-    - http://dev.opera.com/articles/view/html5-canvas-painting/
+  
 COLOR
 #00FF40 purple  #FEFF49 yellow
 #DDA5F7 pink
