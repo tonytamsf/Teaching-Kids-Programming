@@ -2,27 +2,75 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>
 Social Drawing
-</title></head><body><header>
+</title></head>
+<link rel="stylesheet" type="text/css" href="css/neon.css" />
+
 <style>
  body {
      margin: 0;
  }
 
-input {
-  font-size: .75em;
-  width: 65px;
+.palette {
+  font-size: .5em;
+  width: 10;
+  float: left;
+  border: 1px solid black;
+  cursor: pointer ;
+  user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.palette:hover {
+  background-color: cyan;
+}
+
+
+#palette-label {
+ text-align: center;
+  vertical-align: middle;
+}
+
+ 
+#palette-wrap {
+ padding-bottom:5px;
 }
  
-  #main {
+body {
+  font: 1em arial,sans-serif; 
+}
+ 
+input {
+  font-size: .75em;
+  width: 30px;
+  float: left;
+}
+
+.label {
+  font-size: .75em;
+  float: left;
+  vertical-align: middle;
+}
+
+#pensize-div  {
+  padding: 1px;
+  float: left;
+}
+
+#main {
     padding: 10px;
     float: left;
-  }
+}
 
  #toolbar {
     float: left;
-    width: 60px;
+    width: 65px;
  }
-  #color-pallette {
+ 
+ #color-palette {
       width: 50;
       height: 350;
       border: 1px solid black;
@@ -35,69 +83,45 @@ input {
     width: 50px;
     height: 50px;
     float: left;
+    border: 1px solid black;
     position:relative;
     left: 0px;
     top: 0px;
 }
 
-#color1 {
-    background-color: #F60018;
-    position:relative;
-    left: 0px;
-    top: 0px;
+.color-block-class:hover {
+   border: 1px dashed black;
 }
-
-#color2 {
-    background-color: #FEFF49;
-    position:relative;
-}
-
-#color3 {
-    background-color: #00FF40;
-    position:relative;
-}
-
-#color4 {
-    background-color: cyan;
-    position:relative;
-}
-
-#color5 { background-color: #D260FF; width: 50px; height: 50px;
-    position:relative; }
-
-
-#color6 {
-    background-color: #FF2AF8;
-    position:relative;
-}
-
-#color7 {
-    background-color: black;
-    position:relative;
-}
-
-#color-eraser {
-    background-color: white;
-    position:relative;
-}
-
-  #credit {
+ 
+#credit {
     font:8px arial,sans-serif;
     margin: 2px;
     clear: both;
-  }
+}
   
   #drawing-div {
     padding: 10px;
   }
   </style>
-  </header>
-
-<div id="main">
+</head>
+<body>
+  <div id="main">
 
   <div id="toolbar"
-    <div id="color-pallette">
+      <div id="color-palette">
+      <div  lass="label">
+         <span id='palette-label'>neon</span>
+      </div>
       
+    <div id="palette-wrap">
+      <div class="palette" id="neon">Ne</div>
+      <div class="palette" id="winter">Wi</div>
+      <div class="palette" id="spring">Sp</div>
+      <div class="palette" id="summer" >Su</div>
+      <div class="palette" id="fall">Fa</div>
+    </div>
+
+    <div>
       <div id="color1" class="color-block-class">
       </div>
       <div id="color2" class="color-block-class">
@@ -114,16 +138,20 @@ input {
       </div>
       <div id="color-eraser" class="color-block-class">
       </div>
+    </div>
+    
       <div id="pensize-div" class="input">
+	<span class='label' id='pen'>pen</span>
         <form>
-          <input type="text" id="pensize" />
+          <input value="5" type="text" id="pensize" />
           </form>
       </div>
-    </div>
     <div id="credit">
       Tony & Cate T.
     </div>
+    </div>
 </div>
+  
 <div id="drawing-div">
   <canvas id="canvas" width="800" height="650">
   </canvas>
@@ -150,16 +178,36 @@ function init()
     var mouseX;
     var mouseY;
     var canvas = document.getElementById("canvas");
-    var color_pallette = document.getElementById("color-pallette");
 
+    var color_palette = document.getElementById("color-palette");
+
+    // allows us to refer to the pen size later
     pensize = document.getElementById("pensize");
+
+   // when we click on a palette, switch to it
+    var palette = document.getElementById("neon");
+    palette.addEventListener("mousedown", util_load_css, false);
+
+    palette = document.getElementById("winter");
+    palette.addEventListener("mousedown", util_load_css, false);
+
+    palette = document.getElementById("fall");
+    palette.addEventListener("mousedown", util_load_css, false);
+
+    palette = document.getElementById("spring");
+    palette.addEventListener("mousedown", util_load_css, false);
+
+    palette = document.getElementById("summer");
+    palette.addEventListener("mousedown", util_load_css, false);
+
+
     if (canvas && canvas.getContext)
         {
             ctx = canvas.getContext("2d");
             canvas.addEventListener("mousemove", onMouseMove, false);
             canvas.addEventListener("mousedown", onMouseDown, false);
             canvas.addEventListener("mouseup", onMouseUp, false);
-            /* TODO even listening for the color pallette */
+            /* TODO even listening for the color palette */
 
             var colorPicker = document.getElementById('color1');
             colorPicker.addEventListener("mousedown", pickColorMouseDown, false);
@@ -219,6 +267,7 @@ function pickColorMouseDown(e)
              ctx.lineWidth = pensize.value;
       }
    } 
+   util_refresh_state();
 }
 
      function randomRgb() {
@@ -273,4 +322,5 @@ function onMouseDown(e)
     mouseDownY = e.clientY-canvas.offsetTop;
 }
 </script>
-    </body></html>
+<script src="social-drawing.js"></script>
+</body></html>
