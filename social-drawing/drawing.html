@@ -8,6 +8,11 @@ Social Drawing
      margin: 0;
  }
 
+input {
+  font-size: .75em;
+  width: 65px;
+}
+ 
   #main {
     padding: 10px;
     float: left;
@@ -36,42 +41,43 @@ Social Drawing
 }
 
 #color1 {
-    background-color: #ECFC00;
+    background-color: #F60018;
     position:relative;
     left: 0px;
     top: 0px;
 }
 
 #color2 {
-    background-color: #34D800;
+    background-color: #FEFF49;
     position:relative;
 }
 
 #color3 {
-    background-color: #EB3B88;
+    background-color: #00FF40;
     position:relative;
 }
 
 #color4 {
-    background-color: #9240D5;
+    background-color: cyan;
     position:relative;
 }
 
-#color5 {
-    background-color: #F60018;
-    width: 50px;
-    height: 50px;
-    position:relative;
-}
+#color5 { background-color: #D260FF; width: 50px; height: 50px;
+    position:relative; }
 
 
 #color6 {
-    background-color: cyan;
+    background-color: #FF2AF8;
     position:relative;
 }
 
 #color7 {
     background-color: black;
+    position:relative;
+}
+
+#color-eraser {
+    background-color: white;
     position:relative;
 }
 
@@ -106,6 +112,13 @@ Social Drawing
       </div>
       <div id="color7" class="color-block-class">
       </div>
+      <div id="color-eraser" class="color-block-class">
+      </div>
+      <div id="pensize-div" class="input">
+        <form>
+          <input type="text" id="pensize" />
+          </form>
+      </div>
     </div>
     <div id="credit">
       Tony & Cate T.
@@ -118,6 +131,7 @@ Social Drawing
 </div>
 <script>
 var ctx;
+var pensize;
 var penDown = false;
 var neonColor = Array(
                       '#ECFC00', /* yellow */
@@ -137,7 +151,8 @@ function init()
     var mouseY;
     var canvas = document.getElementById("canvas");
     var color_pallette = document.getElementById("color-pallette");
-    
+
+    pensize = document.getElementById("pensize");
     if (canvas && canvas.getContext)
         {
             ctx = canvas.getContext("2d");
@@ -162,6 +177,12 @@ function init()
             colorPicker.addEventListener("mousedown", pickColorMouseDown, false);
 
             colorPicker = document.getElementById('color6');
+            colorPicker.addEventListener("mousedown", pickColorMouseDown, false);
+
+            colorPicker = document.getElementById('color7');
+            colorPicker.addEventListener("mousedown", pickColorMouseDown, false);
+
+            colorPicker = document.getElementById('color-eraser');
             colorPicker.addEventListener("mousedown", pickColorMouseDown, false);
 
             var radial = ctx.createRadialGradient(370, 60, 0, 370, 60, 70);
@@ -191,6 +212,12 @@ function pickColorMouseDown(e)
    if (window.getComputedStyle)
    {
        currentStrokeStyle = window.getComputedStyle(this,null).getPropertyValue('background-color');
+       if (this.id == 'color-eraser')
+       {
+             ctx.lineWidth = pensize.value;
+       } else {
+             ctx.lineWidth = pensize.value;
+      }
    } 
 }
 
@@ -219,7 +246,7 @@ function onMouseMove(e)
         mouseY = e.clientY-canvas.offsetTop;
        //        ctx.strokeStyle = '#9240D5';
 
-        ctx.lineWidth = 3.0
+        ctx.lineWidth = pensize.value;
 
         ctx.beginPath();
         ctx.moveTo(mouseDownX, mouseDownY);
