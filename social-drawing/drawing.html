@@ -76,6 +76,12 @@ input {
 
 #toolbar {
     float: left;
+    border: 2px solid black;
+    margin: 0 auto 0 auto;
+    border-radius: 10px;
+ -webkit-box-shadow: 0px 0px 4px #ff00ff; /* Saf3-4 */
+ -moz-box-shadow: 0px 0px 4px #ff00ff; /* FF3.5 - 3.6 */
+ box-shadow: 0px 0px 4px #ff0ff; /* Opera 10.5, IE9, FF4+, Chrome 10+ */
 }
  
 #color-palette {
@@ -114,7 +120,18 @@ input {
 #canvas {
  float: right;
  border: 2px solid black;
+ border-radius: 10px;
+ -webkit-box-shadow: 0px 0px 4px #ff00ff; /* Saf3-4 */
+ -moz-box-shadow: 0px 0px 4px #ff00ff; /* FF3.5 - 3.6 */
+ box-shadow: 0px 0px 4px #ff0ff; /* Opera 10.5, IE9, FF4+, Chrome 10+ */
 }
+
+#canvas:hover {
+  -moz-transform: rotate(360deg);
+  -moz-transition: all 2s linear;
+  
+}
+
  
 </style>
 </head>
