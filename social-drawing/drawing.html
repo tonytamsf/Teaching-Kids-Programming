@@ -7,7 +7,7 @@ Social Drawing
 
 <style>
  body {
-     margin: 0;
+    margin: 0 auto 0 auto;
  }
 
 .palette {
@@ -24,6 +24,9 @@ Social Drawing
   user-select: none;
 }
 
+#color-blocks {
+  float: left;
+}
 .palette:hover {
   background-color: cyan;
 }
@@ -55,34 +58,37 @@ input {
   vertical-align: middle;
 }
 
+#pensize {
+  placeholder: "Pen Size!"
+}
+
+
 #pensize-div  {
   padding: 1px;
-  float: left;
+  float: none;
 }
 
 #main {
     padding: 10px;
     float: left;
+    margin: 0 auto 0 auto;
 }
 
- #toolbar {
+#toolbar {
     float: left;
-    width: 65px;
- }
+}
  
- #color-palette {
-      width: 50;
-      height: 350;
-      border: 1px solid black;
+#color-palette {
+      width: 65px;
       float: left;
       padding: 2px;
       margin: 2px;
-  }
+}
 
 .color-block-class {
     width: 50px;
     height: 50px;
-    float: left;
+    float: none; 
     border: 1px solid black;
     position:relative;
     left: 0px;
@@ -99,14 +105,21 @@ input {
     clear: both;
 }
   
-  #drawing-div {
-    padding: 10px;
-  }
-  </style>
+#drawing-div {
+    padding: 5px;
+    float: left;
+    margin: 0 auto 0 auto;
+}
+
+#canvas {
+ float: right;
+ border: 2px solid black;
+}
+ 
+</style>
 </head>
 <body>
   <div id="main">
-
   <div id="toolbar"
       <div id="color-palette">
       <div  lass="label">
@@ -121,7 +134,7 @@ input {
       <div class="palette" id="fall">Fa</div>
     </div>
 
-    <div>
+    <div id="color-blocks">
       <div id="color1" class="color-block-class">
       </div>
       <div id="color2" class="color-block-class">
@@ -149,14 +162,18 @@ input {
     <div id="credit">
       Tony & Cate T.
     </div>
+    
     </div>
-</div>
-  
+     <!-- color-palette -->
+
+</div> 
+<!-- toolbar -->
 <div id="drawing-div">
-  <canvas id="canvas" width="800" height="650">
-  </canvas>
+  <canvas id="canvas" width="500" height="500">
+</canvas>
 </div>
 </div>
+<!-- main -->
 <script>
 var ctx;
 var pensize;
@@ -238,19 +255,6 @@ function init()
             ctx.lineWidth = 0.5;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
-
-            // rectangle frame
-            ctx.beginPath();
-            ctx.moveTo(1,1)
-
-            ctx.lineTo(800,1);
-            ctx.lineTo(800, 650);
-
-            ctx.lineTo(1,650);
-            ctx.lineTo(1,1);
-            ctx.stroke();
-
-            ctx.closePath();
 
         }
 }
