@@ -16,10 +16,10 @@ DrawMee
 
 social-drawing: 
 ---------------
-  - Bug: eraser erases border
+  - DONE Bug: eraser erases border
   - Bug: hitting return on pen size resets the drawing
   - Be able to save a drawing and load it back
-  - Switch to 5 different colr pallattes.
+  - DONE Switch to 5 different colr pallattes.
     - Neon
     - summer
     - spring
