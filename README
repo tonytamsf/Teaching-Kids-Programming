@@ -19,14 +19,17 @@ social-drawing:
   - DONE Bug: eraser erases border
   - Bug: hitting return on pen size resets the drawing
   - Be able to save a drawing and load it back
+  - Add more palettes
+    - http://www.colourlovers.com/
+    - http://kuler.adobe.com/#themes/rating?time=30
+  - Share the drawing to a friend, and that friend can see the list of drawings shared with him/her
+
   - DONE Switch to 5 different colr pallattes.
     - Neon
     - summer
     - spring
     - fall
     - winter
-  - Share the drawing to a friend, and that friend can see the list of drawings shared with him/her
-
   - DONE A simple canvas to draw
   - DONE A color palette on top with 7 colors
     - DONE she wants neon colors
