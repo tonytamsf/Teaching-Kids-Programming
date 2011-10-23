@@ -61,11 +61,20 @@ input {
 #pensize {
   placeholder: "Pen Size!"
 }
+ 
+#fadealpha {
+  placeholder: "Alpha (0-1)"
+}
 
+#fade-div  {
+  padding: 1px;
+  float: none;
+  clear: both;
+}
 
 #pensize-div  {
   padding: 1px;
-  float: none;
+  clear: both;
 }
 
 #main {
@@ -117,6 +126,8 @@ input {
     margin: 0 auto 0 auto;
 }
 
+
+ 
 #canvas {
  float: right;
  border: 2px solid black;
@@ -124,12 +135,6 @@ input {
  -webkit-box-shadow: 0px 0px 4px #ff00ff; /* Saf3-4 */
  -moz-box-shadow: 0px 0px 4px #ff00ff; /* FF3.5 - 3.6 */
  box-shadow: 0px 0px 4px #ff0ff; /* Opera 10.5, IE9, FF4+, Chrome 10+ */
-}
-
-#canvas:hover {
-  -moz-transform: rotate(360deg);
-  -moz-transition: all 2s linear;
-  
 }
 
  
@@ -171,9 +176,22 @@ input {
     </div>
     
       <div id="pensize-div" class="input">
-	<span class='label' id='pen'>pen</span>
         <form onSubmit='return false;'>
-          <input value="5" type="text" id="pensize" />
+	<span class='label' id='pen'>pen</span>
+        <input value="200" size=4 type="text" id="pensize" />
+          </form>
+      </div>
+      <div id="fade-div" class="input">
+        <form onSubmit='return false;'>
+	<span class='label' id='fadealpha-lable'>transparent</span>
+          <input value=".25" size=4 type="text" id="fadealpha" />
+          </form>
+      </div>
+
+      <div id="fade-div" class="checkbox">
+        <form onSubmit='return false;'>
+	<span class='label' id='fadealpha-lable'>Auto</span>
+          <input checked="CHECKED" type="checkbox" id="autofade" />
           </form>
       </div>
     <div id="credit">
@@ -186,7 +204,7 @@ input {
 </div> 
 <!-- toolbar -->
 <div id="drawing-div">
-  <canvas id="canvas" width="500" height="500">
+  <canvas id="canvas" width="800" height="800">
 </canvas>
 </div>
 </div>
@@ -194,6 +212,8 @@ input {
 <script>
 var ctx;
 var pensize;
+var fadealpha;
+var autofade;
 var penDown = false;
 var neonColor = Array(
                       '#ECFC00', /* yellow */
@@ -217,6 +237,8 @@ function init()
 
     // allows us to refer to the pen size later
     pensize = document.getElementById("pensize");
+    fadealpha = document.getElementById("fadealpha");
+    autofade = document.getElementById("autofade");
 
    // when we click on a palette, switch to it
     var palette = document.getElementById("neon");
@@ -274,7 +296,43 @@ function init()
             ctx.lineJoin = 'round';
 
         }
+   initBackground();
+
 }
+
+function  initBackground(){
+  var fred = new Image();
+  fred.addEventListener('load',fredLoaded,false);
+  fred.src = 'images/fred.png';
+
+  function fredLoaded() {
+    ctx.drawImage(fred,250,250);
+    setTimeout('fade()', 2000);
+    setTimeout('fadeFred(.1)', 50);
+  }
+}
+
+function fadeFred(opacity) {
+  ctx.fillStyle = 'white';
+  ctx.globalAlpha = opacity;
+  opacity += .05; 
+  ctx.fillRect(10, 10, 780, 780);
+
+  if (opacity < 1) {
+    setTimeout('fadeFred(' + opacity + ')', 50);
+  }
+}
+
+function fade()
+{
+  if (autofade.checked == true) {
+    ctx.fillStyle = 'white';
+     ctx.fillRect(10, 10, 780, 780);
+    ctx.stroke();
+  } 
+  setTimeout('fade()', 2000);
+}
+
 var currentStrokeStyle = 'black';
 function pickColorMouseDown(e)
 {
@@ -324,6 +382,7 @@ function onMouseMove(e)
 function draw(x, y, x1, y1)
 {
         ctx.lineWidth = pensize.value;
+        ctx.globalAlpha = fadealpha.value;
 
         ctx.beginPath();
         ctx.moveTo(x, y);
@@ -345,6 +404,8 @@ function onMouseUp(e)
         draw(mouseDownX, mouseDownY, mouseX, mouseY);
     }
     penDown = false;
+
+    //Canvas2Image.saveAsPNG(canvas);  // will prompt the user to save the image as PNG.  
 }
 
 function onMouseDown(e)
@@ -353,6 +414,8 @@ function onMouseDown(e)
     mouseDownX = e.clientX-canvas.offsetLeft;
     mouseDownY = e.clientY-canvas.offsetTop;
 }
+
 </script>
 <script src="social-drawing.js"></script>
+<script src="canvas2image.js"></script>
 </body></html>
