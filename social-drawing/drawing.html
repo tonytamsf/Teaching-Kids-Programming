@@ -308,7 +308,7 @@ function  initBackground(){
   function fredLoaded() {
     ctx.drawImage(fred,250,250);
     setTimeout('fade()', 2000);
-    setTimeout('fadeFred(.1)', 50);
+    setTimeout('fadeFred(.1)', 200);
   }
 }
 
@@ -319,7 +319,7 @@ function fadeFred(opacity) {
   ctx.fillRect(10, 10, 780, 780);
 
   if (opacity < 1) {
-    setTimeout('fadeFred(' + opacity + ')', 50);
+    setTimeout('fadeFred(' + opacity + ')', 200);
   }
 }
 
